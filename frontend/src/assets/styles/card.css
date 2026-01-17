@@ -1,0 +1,11 @@
+html[data-theme="dark"] {
+ .card-bg {
+    background: rgba(255, 255, 255, .06);
+}
+}
+
+html[data-theme="light"] {
+ .card-bg {
+    background: rgba(0, 0, 0, .06);
+}
+}
