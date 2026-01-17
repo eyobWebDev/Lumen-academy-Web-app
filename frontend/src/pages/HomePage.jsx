@@ -4,10 +4,17 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, ChartLineIcon, Clock12Icon, FileQuestion, FolderClosed, Github, Handshake, MessageCircleMore, PlusSquare, Twitter, Workflow } from "lucide-react";
 import Footer from "@/layouts/base/Footer";
 import { useThemeStore } from "@/store/useThemeStore";
+import { useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 
 export default function HomePage() {
     const {darkMode} = useThemeStore()
+    const [searchParams] = useSearchParams();
+    const id = searchParams.get("id");
+    const navigate = useNavigate()
+
+    if(id) navigate(`/exam/${id}`)
 
 
     return <>

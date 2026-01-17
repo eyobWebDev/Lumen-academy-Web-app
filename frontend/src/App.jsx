@@ -5,7 +5,7 @@ import { X } from 'lucide-react'
 import { Button } from './components/ui/button'
 import { errorToaster, successToaster } from '@/widget/toaster'
 import { BASE_API_URL, NODE_ENV } from '@/utils/constants'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useSearchParams } from 'react-router-dom'
 import HomePage from './pages/HomePage'
 import CursorGlow from './widget/CursorGlowEffect'
 import { useAuthStore } from './store/useAuthStore'
@@ -25,6 +25,8 @@ function App() {
   const {fetchQuestionPool} = useQuestionpoolStore()
   const {fetchQuestion} = useQuestionStore()
   const {fetchExamSchedules} = useExamStore()
+
+
 
   useEffect(() => {
     checkAuth() 
