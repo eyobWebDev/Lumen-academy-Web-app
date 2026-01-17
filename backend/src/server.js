@@ -18,6 +18,7 @@ config()
 app.use(cors({
     origin: [
   "http://localhost:5173", 
+  "https://lumen-academy-web-app.vercel.app"
 ],
     credentials: true
 }))
