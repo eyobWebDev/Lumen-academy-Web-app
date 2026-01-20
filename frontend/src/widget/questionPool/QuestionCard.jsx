@@ -4,7 +4,7 @@ import React, { useState } from "react";
 const QuestionCard = ({question, examStatus, number, correct}) => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [isCorrect, setisCorrect] = useState(null)
-  const {result, addCorrectQuestion} = useExamStore()
+  const {result, addCorrectQuestion, answers, selectAnswer} = useExamStore()
 
   const handleOptionClick = (option) => {
     setSelectedOption(option);
@@ -19,12 +19,16 @@ const QuestionCard = ({question, examStatus, number, correct}) => {
       <ul className="space-y-2">
         {question.options.map((option, index) => {
           const isCorrect = selectedOption && option.label === question.correctOption;
-          const isSelected = selectedOption === option.label;
+          const isSelected = answers[number - 1] === option.label;
+          const selectedAnswer = answers[number - 1];
+          console.log("selectedAnswer", `${number} ${selectedAnswer}`);
+          
 
           return (
             <li
               key={index}
-              onClick={() => examStatus == "live" && handleOptionClick(option.label)}
+              //onClick={() => examStatus == "live" && handleOptionClick(option.label)}
+              onClick={() => examStatus == "live" && selectAnswer(number - 1, option.label)}
               className={`
                 cursor-pointer
                 p-2
@@ -32,7 +36,7 @@ const QuestionCard = ({question, examStatus, number, correct}) => {
                 rounded
                 hover:bg-gray-100
                 ${isSelected ? "border-blue-500 bg-blue-200" : "" }
-                ${examStatus !== "live" ? isCorrect || (correct && option.label == question.correctOption) ? "bg-green-200 border-green-500" : selectedOption && "bg-red-200 border-red-500" : ""}
+                ${examStatus !== "live" ?  option.label == question.correctOption && selectedAnswer ? "bg-green-200 border-green-500" : selectedAnswer == option.label && "bg-red-200 border-red-500" : ""}
               `}
             >
              <div className="flex gap-3">

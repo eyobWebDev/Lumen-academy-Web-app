@@ -17,7 +17,33 @@ export const useExamStore = create((set, get) => ({
     timeLeftSeconds: 1,
     result: 0,
     correctQuestions: [],
+    answers: {},
+    score: 0,
 
+
+    selectAnswer: (qIndex, label) => {
+        set((state) => ({
+            answers: {
+                ...state.answers,
+                [qIndex]: label
+            }
+        }))
+    },
+
+    submitExam: (questions) => {
+        const {answers} = get()
+        console.log("answers", answers);
+        console.log('questions', questions);
+        console.log('correct', answers[i] == q.correctOption);
+        
+        let score = 0
+        questions.forEach((q, i) => {
+            if(answers[i] == q.correctOption){
+                score++
+            }
+        })
+        set({score: score})
+    },
 
     addCorrectQuestion: (data) => {
         const {correctQuestions} = get()

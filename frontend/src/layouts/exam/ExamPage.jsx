@@ -18,7 +18,8 @@ export default function ExamPage() {
     fetchExam,
     tick,
     updateExamStatus,
-    correctQuestions
+    correctQuestions,
+    score
   } = useExamStore();
 
   // Initial fetch
@@ -81,7 +82,7 @@ export default function ExamPage() {
             ))}
           </div>
 
-          <button onClick={() => updateExamStatus("review")} className="btn btn-wide my-10 btn-success">Submit</button>
+          <button onClick={() => updateExamStatus("review") } className="btn btn-wide my-10 btn-success">Submit</button>
         </>
       )}
 
@@ -89,18 +90,18 @@ export default function ExamPage() {
         <>
           <h2>Review</h2>
         <div className="grid lg:grid-cols-3 grid-cols-1 px-3 gap-4">
-          {
-          questions.map((q, i) => {
-            if (correctQuestions.includes(q)) {
+          {questions.map((q, i) => {
+            /* if (correctQuestions.includes(q)) {
               return <QuestionCard question={q} number={i+1} examStatus={examStatus} correct={true} />
             } else {
               return <QuestionCard question={q} number={i+1} examStatus={examStatus} />
-            }
+            } */
+           return <QuestionCard question={q} number={i+1} examStatus={examStatus} />
           })}
           </div>
 
           <h1 className="text-2xl p-10 font-bold">
-            Result: {correctQuestions.length} / 50
+            Result: {score} / 50
           </h1>
         </>
       )}
