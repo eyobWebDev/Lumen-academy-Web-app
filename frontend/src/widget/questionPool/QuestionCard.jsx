@@ -45,7 +45,7 @@ const QuestionCard = ({question, examStatus, number, correct}) => {
             >
              <div className="flex gap-3">
               <div>{option.label}.</div>
-              <div><ReactMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatex]} children={option.text} />.</div>
+              <div><ReactMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatex]} children={option.text} /></div>
              </div>
             </li>
           );
@@ -57,7 +57,7 @@ const QuestionCard = ({question, examStatus, number, correct}) => {
         </p>
 
          <p className="mt-4 font-medium">
-          {examStatus !== "live" && `Explanation: ${<ReactMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatex]} children={question.explanation} />}`}
+          {examStatus !== "live" && "Explanation: "} {examStatus !== "live" && <ReactMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatex]} children={question.explanation} />}
         </p>
 
     </div>
