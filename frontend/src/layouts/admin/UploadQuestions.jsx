@@ -54,7 +54,10 @@ export default function UploadQuestions() {
       </button>
     </div>
     <div className="mt-5 grid lg:grid-cols-2 grid-cols-1 gap-4 px-2">
+
         {questions.map(question => {
+          console.log("question", question); 
+  
           return <StaticQuestionCard question={question} />
         })}
     </div>

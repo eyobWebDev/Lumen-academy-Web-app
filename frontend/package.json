@@ -25,12 +25,14 @@
     "@tailwindcss/postcss": "^4.1.11",
     "@tailwindcss/vite": "^4.1.11",
     "axios": "^1.10.0",
+    "better-react-mathjax": "^2.4.0-beta-1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
     "date-fns": "^4.1.0",
     "embla-carousel-react": "^8.6.0",
     "lucide-react": "^0.525.0",
+    "mathlive": "^0.108.2",
     "next-themes": "^0.4.6",
     "react": "^19.1.0",
     "react-day-picker": "^9.9.0",
@@ -41,7 +43,12 @@
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.3.1",
     "vaul": "^1.1.2",
-    "zustand": "^5.0.6"
+    "zustand": "^5.0.6",
+    "katex": "^0.16.25",
+    "react-katex": "^3.1.0",
+    "react-markdown": "^10.1.0",
+    "rehype-katex": "^7.0.1",
+    "remark-math": "^6.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.30.1",

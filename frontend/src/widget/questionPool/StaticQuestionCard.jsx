@@ -1,4 +1,9 @@
-import React, { useState } from "react";
+import { MathJax } from "better-react-mathjax";
+import React from "react";
+import{ useState } from "react";
+import ReactMarkdown from "react-markdown";
+import rehypeKatex from "rehype-katex";
+import remarkMath from "remark-math";
 
 const StaticQuestionCard = ({question}) => {
   const [selectedOption, setSelectedOption] = useState(null);
@@ -10,7 +15,7 @@ const StaticQuestionCard = ({question}) => {
 
   return (
     <div className="p-4 border rounded shadow-md w-full max-w-md bg-white">
-      <h2 className="text-lg font-semibold mb-4">{question.text}</h2>
+      <h2 className="text-lg font-semibold mb-4"><ReactMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatex]} children={question.text} /></h2>
       
       <ul className="space-y-2">
         {question.options.map((option, index) => {
@@ -32,7 +37,7 @@ const StaticQuestionCard = ({question}) => {
             >
              <div className="flex gap-3">
               <div>{option.label}.</div>
-              <div>{option.text}.</div>
+              <div><ReactMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatex]} children={option.text} /></div>
              </div>
             </li>
           );
@@ -44,7 +49,7 @@ const StaticQuestionCard = ({question}) => {
         </p>
 
         <p className="mt-4 font-medium">
-          {`Explanation: ${question.explanation}`}
+          Explanation: <ReactMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatex]} children={question.explanation} />
         </p>
 
     </div>

@@ -18,7 +18,21 @@ html[data-theme="light"] #root {
 html[data-theme="light"] .home-Page {
   @apply bg-gray-500;
 }
+/* Force inline formulas to behave like text */
+mjx-container {
+  display: inline !important;
+  vertical-align: middle !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1 !important;
+  font-size: inherit !important;
+}
 
+/* Keep block math separate */
+mjx-container[display="true"] {
+  display: block !important;
+  margin: 0.5em 0 !important;
+}
 
 /*
 

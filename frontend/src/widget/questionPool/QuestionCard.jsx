@@ -1,5 +1,9 @@
 import { useExamStore } from "@/store/useExamStore";
+import { MathJax } from "better-react-mathjax";
 import React, { useState } from "react";
+import ReactMarkdown from "react-markdown";
+import rehypeKatex from "rehype-katex";
+import remarkMath from "remark-math";
 
 const QuestionCard = ({question, examStatus, number, correct}) => {
   const [selectedOption, setSelectedOption] = useState(null);
@@ -14,7 +18,7 @@ const QuestionCard = ({question, examStatus, number, correct}) => {
 
   return (
     <div className="p-4 border rounded shadow-md w-full max-w-md bg-white">
-      <h2 className="text-lg font-semibold flex gap-3 mb-4">{number}. {question.text}</h2>
+      <h2 className="text-lg font-semibold flex gap-3 mb-4">{number}. <ReactMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatex]} children={question.text} /></h2>
       
       <ul className="space-y-2">
         {question.options.map((option, index) => {
@@ -41,7 +45,7 @@ const QuestionCard = ({question, examStatus, number, correct}) => {
             >
              <div className="flex gap-3">
               <div>{option.label}.</div>
-              <div>{option.text}.</div>
+              <div><ReactMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatex]} children={option.text} />.</div>
              </div>
             </li>
           );
@@ -53,7 +57,7 @@ const QuestionCard = ({question, examStatus, number, correct}) => {
         </p>
 
          <p className="mt-4 font-medium">
-          {examStatus !== "live" && `Explanation: ${question.explanation}`}
+          {examStatus !== "live" && `Explanation: ${<ReactMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatex]} children={question.explanation} />}`}
         </p>
 
     </div>

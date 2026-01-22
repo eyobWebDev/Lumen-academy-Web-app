@@ -16,8 +16,17 @@ import { useQuestionpoolStore } from './store/useQuestionPoolStore'
 import { useQuestionStore } from './store/useQuestionStore'
 import ExamPage from './layouts/exam/ExamPage'
 import { useExamStore } from './store/useExamStore'
+import { MathJaxContext } from 'better-react-mathjax'
 
+const config = {
+  tex: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["$$", "$$"]],
+    processEscapes: true,
+    packages: { "[+]": ["ams"] },
+  },
 
+};
 
 function App() {
   const {checkAuth} = useAuthStore()
@@ -38,6 +47,7 @@ function App() {
 
   return (
     <>
+    <MathJaxContext config={config} >
     <div style={{transition: "all 0.5s"}}>
       {/*Cursorglow here if you like it */}
       <Routes>
@@ -48,6 +58,7 @@ function App() {
 
     <Toaster />
     </div>
+    </MathJaxContext>
     
   </>
   )
