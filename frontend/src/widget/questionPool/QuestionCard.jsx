@@ -1,20 +1,12 @@
 import { useExamStore } from "@/store/useExamStore";
-import { MathJax } from "better-react-mathjax";
 import React, { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
 
-const QuestionCard = ({question, examStatus, number, correct}) => {
-  const [selectedOption, setSelectedOption] = useState(null);
-  const [isCorrect, setisCorrect] = useState(null)
-  const {result, addCorrectQuestion, answers, selectAnswer} = useExamStore()
+const QuestionCard = ({question, examStatus, number}) => {
+  const {answers, selectAnswer} = useExamStore()
 
-  const handleOptionClick = (option) => {
-    setSelectedOption(option);
-    setisCorrect(option == question.correctOption)
-    if(option == question.correctOption) addCorrectQuestion(question)
-  };
 
   return (
     <div className="p-4 border rounded shadow-md w-full max-w-md bg-white">
@@ -22,11 +14,8 @@ const QuestionCard = ({question, examStatus, number, correct}) => {
       
       <ul className="space-y-2">
         {question.options.map((option, index) => {
-          const isCorrect = selectedOption && option.label === question.correctOption;
           const isSelected = answers[number - 1] === option.label;
           const selectedAnswer = answers[number - 1];
-          console.log("selectedAnswer", `${number} ${selectedAnswer}`);
-          
 
           return (
             <li
@@ -52,13 +41,13 @@ const QuestionCard = ({question, examStatus, number, correct}) => {
         })}
       </ul>
       
-        <p className="mt-4 font-medium">
+        <div className="mt-4 font-medium">
           {examStatus !== "live" && `Correct ✅ ${question.correctOption}`}
-        </p>
+        </div>
 
-         <p className="mt-4 font-medium">
-          {examStatus !== "live" && "Explanation: "} {examStatus !== "live" && <ReactMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatex]} children={question.explanation} />}
-        </p>
+         <div className="mt-4 font-medium">
+          {examStatus !== "live" && "Exdivlanation: "} {examStatus !== "live" && <ReactMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatex]} children={question.explanation} />}
+        </div>
 
     </div>
   );

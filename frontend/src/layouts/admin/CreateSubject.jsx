@@ -34,12 +34,11 @@ export default function CreateSubject() {
       </button>
     </div>
 
-    <div className="flex mt-5 flex-col gap-3">
-      <h1>All Subjects</h1>
+    <h1 className="mt-5 font-bold text-2xl">All Subjects</h1>
+    <div className="grid mt-5 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-3">
         {subjects.map(subject => {
           return <SubjectCard subject={subject} />
         })}
-
     </div>
     </>
   );

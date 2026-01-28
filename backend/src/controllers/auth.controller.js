@@ -9,7 +9,7 @@ import cloudinary from "../config/cloudinary.js"
 config()
 
 export const signup = async (req, res) => {
-    const {username, password } = req.body
+    const {username, password, role } = req.body
     try {
         if (password.length < 6) {
             return res.status(400).json({message: "Password must be at least 6 charachter."})
@@ -20,7 +20,8 @@ export const signup = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, salt)
         const newUser = new User({
             username,
-            password: hashedPassword
+            password: hashedPassword,
+            role: role || "user"
         })
         if (newUser) {
             generateToken(newUser._id, res)
@@ -38,7 +39,7 @@ export const signup = async (req, res) => {
 export const login = async (req, res) => {
     const {username, password } = req.body
     
-    try {
+    try {       
         const user = await User.findOne({username})
         if (!user) return res.status(400).json({message: "Invalid credentials."})
         const isPasswordCorrect = await bcrypt.compare(password, user.password)

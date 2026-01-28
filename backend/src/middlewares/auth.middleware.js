@@ -5,6 +5,7 @@ export const protectedRoute = async (req, res, next) => {
     try {
         const token = req.cookies.jwt
         
+        
         if (!token) {
             res.status(401).json({message: "Unauthorized - No token provided."})
         }
@@ -25,4 +26,14 @@ export const protectedRoute = async (req, res, next) => {
         res.status(500).json({message: "Internal server error"})
     }
     
+}
+
+export const authorizeRoles = (...allowedRoles) => {
+    return (req, res, next) => {
+        if(!req.user) return res.status(401).json({message: "Not Authenticated."})
+
+        if(!allowedRoles.includes(req.user.role)) return res.status(403).json({message: "Not Authorized: Acces Denied"})
+
+        next()
+    }
 }

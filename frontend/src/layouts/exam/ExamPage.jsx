@@ -1,7 +1,6 @@
 import { useExamStore } from "@/store/useExamStore";
 import Countdown from "@/widget/exam/CountDown";
 import QuestionCard from "@/widget/questionPool/QuestionCard";
-import StaticQuestionCard from "@/widget/questionPool/StaticQuestionCard";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
@@ -18,7 +17,7 @@ export default function ExamPage() {
     fetchExam,
     tick,
     updateExamStatus,
-    correctQuestions,
+    submitExam,
     score
   } = useExamStore();
 
@@ -70,32 +69,41 @@ export default function ExamPage() {
   return (
     <>
       {examStatus === "scheduled" && (
-        <><h2>Exam starts at {startTime.toLocaleTimeString()}</h2><Countdown targetTime={startTime} /></>
+        <div className="bg-white">
+          <h2>Exam starts at {startTime.toLocaleTimeString()}</h2>
+          <Countdown targetTime={startTime} />
+        </div>
       )}
 
       {examStatus === "live" && (
         <>
-          <h2>Time left: {timeLeft}s</h2>
+          <h2 className="sticky top-0 bg-base-300 p-3 drop-shadow font-bold">Time left: {timeLeft}s</h2>
+
           <div className="grid lg:grid-cols-3 grid-cols-1 px-3 gap-4">
             {questions.map((q, i) => (
               <QuestionCard question={q} number={i+1} examStatus={examStatus} />
             ))}
           </div>
 
-          <button onClick={() => updateExamStatus("review") } className="btn btn-wide my-10 btn-success">Submit</button>
+          <button onClick={() => {
+            submitExam(questions)
+            updateExamStatus("review") 
+          } } className="btn btn-wide my-10 btn-success">Submit</button>
         </>
       )}
 
       {examStatus === "review" && (
         <>
-          <h2>Review</h2>
+          <div className="sticky flex justify-between top-0 bg-base-300 p-3 drop-shadow mb-0.5 font-bold">
+            <div className="flex flex-col">
+              <span>Review</span>
+              <span className=" text-sm font-light">You can review your answers now!</span>
+            </div>
+
+            <div>Result: <span className="text-green-500">{score} / 50</span> </div>
+          </div>
         <div className="grid lg:grid-cols-3 grid-cols-1 px-3 gap-4">
           {questions.map((q, i) => {
-            /* if (correctQuestions.includes(q)) {
-              return <QuestionCard question={q} number={i+1} examStatus={examStatus} correct={true} />
-            } else {
-              return <QuestionCard question={q} number={i+1} examStatus={examStatus} />
-            } */
            return <QuestionCard question={q} number={i+1} examStatus={examStatus} />
           })}
           </div>

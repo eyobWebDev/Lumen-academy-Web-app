@@ -46,6 +46,8 @@ export const useAuthStore = create((set, get) => ({
     },
     login: async (data) => {
         set({isLoggingIn: true})
+        console.log("logging in...");
+        
         try{
             const res = await Axios.post("api/auth/login", data)
             set({authUser: res.data})
@@ -56,6 +58,8 @@ export const useAuthStore = create((set, get) => ({
         } finally {
             set({isLoggingIn: false})
         }
+        console.log("succesfully logged.");
+        
     },
     logout: async () => {
         set({isLoggingOut: true})

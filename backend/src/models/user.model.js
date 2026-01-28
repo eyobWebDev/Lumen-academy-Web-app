@@ -21,6 +21,15 @@ const userSchema = new mongoose.Schema(
         profilePic: {
             type: String,
             default: ""
+        },
+        role: {
+            type: String,
+            enum: ["admin", "user"],
+            default: "user"
+        },
+        telegramUsername: {
+            type: String,
+            default: ""
         }
     }, { timestamps: true });
 

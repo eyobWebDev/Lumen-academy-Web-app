@@ -5,7 +5,7 @@ import { X } from 'lucide-react'
 import { Button } from './components/ui/button'
 import { errorToaster, successToaster } from '@/widget/toaster'
 import { BASE_API_URL, NODE_ENV } from '@/utils/constants'
-import { Route, Routes, useSearchParams } from 'react-router-dom'
+import { Navigate, Route, Routes, useNavigate, useSearchParams } from 'react-router-dom'
 import HomePage from './pages/HomePage'
 import CursorGlow from './widget/CursorGlowEffect'
 import { useAuthStore } from './store/useAuthStore'
@@ -29,15 +29,26 @@ const config = {
 };
 
 function App() {
-  const {checkAuth} = useAuthStore()
+  const {checkAuth, authUser, logout} = useAuthStore()
   const {fetchSubjects} = useSubjectStore()
   const {fetchQuestionPool} = useQuestionpoolStore()
   const {fetchQuestion} = useQuestionStore()
   const {fetchExamSchedules} = useExamStore()
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate()
+  const id = searchParams.get("id");
 
+  
+
+
+  const Logout = () => {
+    logout()
+    navigate("/")
+  }
 
 
   useEffect(() => {
+    if(id) navigate(`/exam/${id}`)
     checkAuth() 
     fetchSubjects()
     fetchQuestionPool()
@@ -52,7 +63,8 @@ function App() {
       {/*Cursorglow here if you like it */}
       <Routes>
         <Route path='/*' element={<HomePage />} />
-        <Route path='/admin/*' element={<AdminPage />} />
+        <Route path='/logout' element={<Logout />} />
+        <Route path='/admin/*' element={authUser?.role == "admin" ? <AdminPage /> : <Navigate to={`/`} /> } />
         <Route path='/exam/:examID' element={<ExamPage />} />
       </Routes>
 

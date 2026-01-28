@@ -22,7 +22,9 @@ export const createQuestion = async (req, res) => {
 
 export const fetchAllQuestion = async (req, res) => {
     try {
-        const questionPools = await Question.find().sort({ name: 1 }).populate("poolID", "name totalQuestions").populate("sectionID", "title instruction order");
+        const questionPools = await Question.find().sort({ name: 1 }).populate("sectionID", "title instruction order").populate({
+          path: "poolID", populate: {path: "subjectID", select: "name", select: "name totalQuestions"}
+        })
         res.status(200).json(questionPools)
     } catch (e) {
         console.log("Error fetching Question Pool", e.message)

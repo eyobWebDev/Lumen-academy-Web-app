@@ -10,12 +10,6 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 
 export default function HomePage() {
     const {darkMode} = useThemeStore()
-    const [searchParams] = useSearchParams();
-    const id = searchParams.get("id");
-    const navigate = useNavigate()
-
-    if(id) navigate(`/exam/${id}`)
-
 
     return <>
  

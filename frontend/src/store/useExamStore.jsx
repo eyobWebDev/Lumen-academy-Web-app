@@ -32,10 +32,7 @@ export const useExamStore = create((set, get) => ({
 
     submitExam: (questions) => {
         const {answers} = get()
-        console.log("answers", answers);
-        console.log('questions', questions);
-        console.log('correct', answers[i] == q.correctOption);
-        
+
         let score = 0
         questions.forEach((q, i) => {
             if(answers[i] == q.correctOption){
