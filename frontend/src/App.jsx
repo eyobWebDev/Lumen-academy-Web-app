@@ -17,7 +17,7 @@ import { useQuestionStore } from './store/useQuestionStore'
 import ExamPage from './layouts/exam/ExamPage'
 import { useExamStore } from './store/useExamStore'
 import { MathJaxContext } from 'better-react-mathjax'
-
+import "katex/dist/katex.min.css"
 const config = {
   tex: {
     inlineMath: [["\\(", "\\)"]],
