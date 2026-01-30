@@ -18,7 +18,7 @@ const QuestionCard = ({question, examStatus, number, correct}) => {
 
   return (
     <div className="p-4 border rounded shadow-md w-full max-w-md bg-white">
-      <h2 className="text-lg font-semibold flex gap-3 mb-4">{number}. <ReactMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatex]} children={question.text} /></h2>
+      <h2 className="text-lg font-semibold gap-3 mb-4">{number}. <ReactMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatex]} children={question.text} /></h2>
       
       <ul className="space-y-2">
         {question.options.map((option, index) => {
