@@ -6,7 +6,7 @@ import { Loader2, LogIn, LogOut, MenuIcon, MoonStar, Sun } from "lucide-react"
 import { Menu } from "@radix-ui/react-menubar"
 import DropDownMenu from "@/widget/DropDownMenu"
 import { useAuthStore } from "@/store/useAuthStore"
-import AdminLogInDialog from "../auth/AdminLogInDialog"
+import AuthDialog from "../auth/AuthDialog"
 
 
 export default function NavBar() {
@@ -46,7 +46,7 @@ export default function NavBar() {
                 
                 {authUser ? <button onClick={handleLogOut} className="btn btn-error btn-link btn-sm flex gap-3">
                     {isLoggingOut ? <Loader2 className="animate-spin" /> : `Log Out`} <LogOut size={15} /> </button> : 
-                    <AdminLogInDialog  trigger={<a className={`hover:text-blue-500`}><Button variant={`outline`} className={`hover:bg-blue-200`}>
+                    <AuthDialog  trigger={<a className={`hover:text-blue-500`}><Button variant={`outline`} className={`hover:bg-blue-200`}>
                     Sign In</Button></a>} />}
             </div>
         </div>

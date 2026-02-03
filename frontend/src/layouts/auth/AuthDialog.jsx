@@ -3,7 +3,7 @@ import { useAuthStore } from "@/store/useAuthStore";
 import { Eye, EyeClosed, EyeOff } from "lucide-react";
 import { useState } from "react";
 
-export default function AdminLogInDialog({trigger}) {
+export default function AuthDialog({trigger}) {
     const {login} = useAuthStore()
     const [username, setUsername] = useState("") 
     const [password, setPassword] = useState("") 

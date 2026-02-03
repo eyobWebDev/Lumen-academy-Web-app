@@ -17,6 +17,7 @@ import { useQuestionStore } from './store/useQuestionStore'
 import ExamPage from './layouts/exam/ExamPage'
 import { useExamStore } from './store/useExamStore'
 import { MathJaxContext } from 'better-react-mathjax'
+import "katex/dist/katex.min.css"
 
 const config = {
   tex: {
@@ -38,9 +39,6 @@ function App() {
   const navigate = useNavigate()
   const id = searchParams.get("id");
 
-  
-
-
   const Logout = () => {
     logout()
     navigate("/")
@@ -58,19 +56,18 @@ function App() {
 
   return (
     <>
-    <MathJaxContext config={config} >
     <div style={{transition: "all 0.5s"}}>
       {/*Cursorglow here if you like it */}
       <Routes>
         <Route path='/*' element={<HomePage />} />
         <Route path='/logout' element={<Logout />} />
-        <Route path='/admin/*' element={authUser?.role == "admin" ? <AdminPage /> : <Navigate to={`/`} /> } />
+        <Route path='/admin/*' element={authUser && authUser.role == "admin" ? <AdminPage /> : <Navigate to={`/`} /> } />
         <Route path='/exam/:examID' element={<ExamPage />} />
       </Routes>
 
     <Toaster />
     </div>
-    </MathJaxContext>
+
     
   </>
   )

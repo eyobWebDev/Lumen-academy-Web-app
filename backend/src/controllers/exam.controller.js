@@ -143,7 +143,7 @@ export const getLiveExamQuestions = async (req, res) => {
 
 export const getExamSchedule = async (req, res) => {
     try {
-          const examschedules = await Exam.find().sort({ name: 1 });
+          const examschedules = await Exam.find({}).sort({createdAt : "descending"});
           res.status(200).json(examschedules)
       } catch (e) {
           console.log("Error fetching Exam", e.message)

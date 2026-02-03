@@ -7,19 +7,7 @@ import { useParams } from "react-router-dom";
 
 export default function ExamPage() {
   const { examID } = useParams();
-  
-  const {
-    examStatus,
-    questions,
-    startTime,
-    timeLeft,
-    loading,
-    fetchExam,
-    tick,
-    updateExamStatus,
-    submitExam,
-    score
-  } = useExamStore();
+  const { examStatus, questions, startTime, timeLeft, loading, fetchExam, tick, updateExamStatus,submitExam, score } = useExamStore();
 
   // Initial fetch
   useEffect(() => {
@@ -45,24 +33,13 @@ export default function ExamPage() {
   // Exam timer DURING live
   useEffect(() => {
     if (examStatus !== "live") return;
-
+    if(examStatus === "review") return submitExam(questions)
     const interval = setInterval(() => {
       tick();
     }, 1000);
 
     return () => clearInterval(interval);
   }, [examStatus]);
-
-  useEffect(() => {
-    if (timeLeft <= 0) return;
-
-    const interval = setInterval(() => {
-      setTimeLeft(prev => Math.max(prev - 1, 0));
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, [timeLeft]);
-  
 
   if (loading) return <p>Loading...</p>;  
 
@@ -100,7 +77,7 @@ export default function ExamPage() {
               <span className=" text-sm font-light">You can review your answers now!</span>
             </div>
 
-            <div>Result: <span className="text-green-500">{score} / 50</span> </div>
+            <div className="text-xl">Result: <span className="text-green-500">{score} / 50</span> </div>
           </div>
         <div className="grid lg:grid-cols-3 grid-cols-1 px-3 gap-4">
           {questions.map((q, i) => {

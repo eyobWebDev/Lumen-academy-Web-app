@@ -9,7 +9,7 @@ import cloudinary from "../config/cloudinary.js"
 config()
 
 export const signup = async (req, res) => {
-    const {username, password, role } = req.body
+    const {username, password } = req.body
     try {
         if (password.length < 6) {
             return res.status(400).json({message: "Password must be at least 6 charachter."})
@@ -21,7 +21,7 @@ export const signup = async (req, res) => {
         const newUser = new User({
             username,
             password: hashedPassword,
-            role: role || "user"
+            role: "user"
         })
         if (newUser) {
             generateToken(newUser._id, res)

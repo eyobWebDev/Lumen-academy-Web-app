@@ -112,7 +112,7 @@ export const useExamStore = create((set, get) => ({
         try {
             const res = await Axios.post("/api/exams/new", data)
             if(res.status != 201) return errorToaster("Cannot create the Exam", res.data.message, "") 
-            set({exams: [...exams, res.data]})
+            set({exams: [ res.data, ...exams]})
             successToaster("Exam Scheduled Succesfully.")
         }catch (e){
             console.log("Error creating Exam", e)

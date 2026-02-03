@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useQuestionpoolStore } from "@/store/useQuestionPoolStore";
 import { errorToaster } from "@/widget/toaster";
 import { useQuestionStore } from "@/store/useQuestionStore";
 import StaticQuestionCard from "@/widget/questionPool/StaticQuestionCard";
 import { useSubjectStore } from "@/store/useSubjectStore";
+import { Loader2 } from "lucide-react";
 
 export default function UploadQuestions() {
   const [file, setFile] = useState(null);
@@ -12,8 +13,7 @@ export default function UploadQuestions() {
   const {questionPools} = useQuestionpoolStore()
   const {subjects} = useSubjectStore()
   const {uploadQuestions, questions} = useQuestionStore()
-  const [currentQuestions, setCurrentQuestions] = useState(questions)
-console.log(questions);
+  const [currentQuestions, setCurrentQuestions] = useState([])
 
   const upload = async () => {
     if (!file) return errorToaster("Please Select a file");
@@ -27,18 +27,15 @@ console.log(questions);
     setPoolID("")
   };
 
-  const filterBySubject = (subject) => {
-    const filteredQuestions = questions.filter(question => question.poolID.subjectID.name == subject)
-    setCurrentQuestions(filteredQuestions);
-    
+  const filterBySubject = async (subject) => {
+    const filteredQuestions = await questions.filter(question => question.poolID.subjectID.name == subject)
+    setCurrentQuestions(filteredQuestions); 
   }
 
   const filterByQuestionPool = (poolId) => {
     const filteredQuestions = questions.filter(question => question.poolID._id == poolId)
     setCurrentQuestions(filteredQuestions);
-    
   }
-  
 
   return (
     <>

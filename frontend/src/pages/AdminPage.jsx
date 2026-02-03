@@ -2,6 +2,7 @@ import AdminDashboard from "@/layouts/admin/AdminDashboard"
 import CreateExam from "@/layouts/admin/CreateExam"
 import CreateQuestionPool from "@/layouts/admin/CreateQuestionPool"
 import CreateSubject from "@/layouts/admin/CreateSubject"
+import KatextDisplay from "@/layouts/admin/KatextDisplay"
 import UploadQuestions from "@/layouts/admin/UploadQuestions"
 import { useAuthStore } from "@/store/useAuthStore"
 import { ArrowLeft, Menu } from "lucide-react"
@@ -34,6 +35,7 @@ export default function AdminPage(){
             <Link to="/admin/exams" className="block hover:text-gray-300">Exams</Link>
             <Link to="/admin/questions" className="block hover:text-gray-300">Upload Questions</Link>
             <Link to="/admin/questions-pool" className="block hover:text-gray-300">Create Question Pool</Link>
+            <Link to="/admin/katext" className="block hover:text-gray-300">TRy Katex</Link>
             </nav>
         </aside>
 
@@ -46,6 +48,7 @@ export default function AdminPage(){
                 <Route path="exams" element={<CreateExam />} />
                 <Route path="questions" element={<UploadQuestions />} />
                 <Route path="questions-pool" element={<CreateQuestionPool />} />
+                <Route path="katext" element={<KatextDisplay />} />
             </Routes>
         </div>
       </main>

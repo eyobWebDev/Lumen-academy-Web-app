@@ -61,9 +61,9 @@ export default function CreateQuestionPool(){
         Create
       </button>
     </div>
-    
-    <div className="flex mt-5 flex-col gap-5">
-      <h1>All Question Pools</h1>
+    <h1>All Question Pools</h1>
+    <div className="grid lg:grid-cols-2 grid-cols-1 mt-5 gap-5">
+      
       {questionPools.map(pool => {
         return <QuesionPoolCard questionPool={pool} />
       })}

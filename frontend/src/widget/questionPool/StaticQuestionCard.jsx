@@ -15,7 +15,7 @@ const StaticQuestionCard = ({question, id}) => {
 
   return (
     <div className="p-4 border rounded shadow-md w-full max-w-md bg-white">
-      <h2 className="text-lg font-semibold mb-4"><ReactMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatex]} children={question.text} /></h2>
+      <h2 className="text-lg font-semibold mb-4">{id+1}.<ReactMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatex]} children={question.text} /></h2>
       
       <ul className="space-y-2">
         {question.options.map((option, index) => {

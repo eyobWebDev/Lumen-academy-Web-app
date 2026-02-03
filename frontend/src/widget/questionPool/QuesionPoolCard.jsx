@@ -1,5 +1,4 @@
 function QuesionPoolCard({ questionPool : subject }) {
-  console.log(subject);
   
   return (
     <div className="border-l-2  bg-base-300 rounded-lg p-4 shadow hover:shadow-md transition">
