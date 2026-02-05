@@ -23,7 +23,9 @@ export default function ExamList() {
                 </div>
               </h3>
 
-              <h3 className="font-bold flex items-center gap-3 w-full">Live URL: <div className="p-1 px-2 rounded-xl bg-white inset-shadow-2xs shadow-2xl">{baseUrl}?id={exam._id}</div></h3>
+              <h3 className="font-bold flex items-center gap-3 mb-2 w-full">
+                Live URL: <div className="p-1 px-2 rounded-xl bg-white inset-shadow-2xs shadow-2xl">{baseUrl}?id={exam._id}</div>
+              </h3>
 
               <p className="text-sm text-gray-500">ends in {new Date(exam.endTime).toLocaleDateString()}, {new Date(exam.endTime).toLocaleTimeString()}</p>
             </div>     

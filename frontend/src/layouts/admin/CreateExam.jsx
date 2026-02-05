@@ -28,7 +28,7 @@ export default function CreateExam() {
 
   return (
     <>
-    <div className="max-w-lg bg-white p-6 rounded-xl shadow">
+    <div className="max-w-lg bg-white p-3 rounded-xl shadow">
         <h2 className="text-xl font-bold mb-4">Create Exam</h2>
 
         <select

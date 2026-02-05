@@ -1,4 +1,5 @@
 import AdminDashboard from "@/layouts/admin/AdminDashboard"
+import AdminPanelDrawer from "@/layouts/admin/AdminPanelDrawer"
 import CreateExam from "@/layouts/admin/CreateExam"
 import CreateQuestionPool from "@/layouts/admin/CreateQuestionPool"
 import CreateSubject from "@/layouts/admin/CreateSubject"
@@ -19,7 +20,7 @@ export default function AdminPage(){
     return <>
         <div className="flex lg:flex-row flex-col min-h-screen bg-gray-100">
             <div className="py-3 lg:hidden flex items-center px-3 gap-5">
-                <div className="font-bold"><Menu /></div>
+                <AdminPanelDrawer trigger={<div className="font-bold"><Menu /></div>} />
                 <h1 className="text-xl font-bold">Admin Panel</h1>
             </div>
         {/* Sidebar */}
